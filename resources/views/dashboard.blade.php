@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Bem vindo,') }} {{ Auth::user()->name }}
+            {{ __('Bem vindo, ofertas do dia') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
     <form action="{{ route('offer.add') }}">
-        <button style="background-color: #c2fbd7;border-radius: 20px;color: green;cursor: pointer;display: inline-block;font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;padding: 7px 20px;text-align: center;text-decoration: none;transition: all 250ms;border: 0;font-size: 16px;user-select: none;-webkit-user-select: none;touch-action: manipulation;">Cadastrar Nova Oferta</button>
+        <button class="confirm-button">Cadastrar Nova Oferta</button>
     </form>
     </button>
     @foreach ($offers as $key => $offer)
@@ -20,6 +20,8 @@
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ $offer->name }}</h5>
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Descrição da oferta {{ $offer->descri }}</p>
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Valor {{ $offer->value }}R$</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Postado por {{ \App\Models\User::find($offer->user_id)->name}}</p>
+                            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">No dia {{ $offer->created_at->format('d/m') }} de {{ $offer->created_at->format('Y') }}</p>
                         </div>
                     </a>
                     <form method="POST" action="{{ route('offer.destroy', [$offer->id]) }}">

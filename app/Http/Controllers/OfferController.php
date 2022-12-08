@@ -8,9 +8,7 @@ use App\Models\Offer;
 class OfferController extends Controller
 {
     public function index(){
-
         $offers = Offer::all();
-
         return view('dashboard', compact(['offers']));
     }
 
